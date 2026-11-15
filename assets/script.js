@@ -55,7 +55,46 @@ form.addEventListener('submit', e => {
 const io = 'IntersectionObserver' in window && new IntersectionObserver(entries => {
   entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
 }, { rootMargin: '0px 0px -8% 0px' });
-document.querySelectorAll('.section-head, .pool-card, .steps li, .service-list li, .eq-grid figure, .chem, .proj-grid > div, .mosaic, .about-copy')
+document.querySelectorAll('.section-head, .pool-card, .steps li, .service-list li, .eq-grid figure, .chem, .proj-grid > div, .mosaic, .about-copy, .olympic-copy, .olympic-photos')
   .forEach(el => { if (io) { el.classList.add('reveal'); io.observe(el); } });
 
 document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ---------- Our work: filters + photo viewer ----------
+(function () {
+  const items = [...document.querySelectorAll('.work')];
+  const filters = document.querySelectorAll('.filter');
+  filters.forEach(btn => btn.addEventListener('click', () => {
+    filters.forEach(b => { const on = b === btn; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on); });
+    const f = btn.dataset.filter;
+    items.forEach(it => { it.hidden = !(f === 'all' || it.dataset.cat === f); });
+  }));
+
+  const lb = document.querySelector('.lightbox');
+  if (!lb || typeof lb.showModal !== 'function') return;
+  const img = lb.querySelector('img'), cap = lb.querySelector('figcaption');
+  let list = [], idx = 0;
+  function show(i) {
+    idx = (i + list.length) % list.length;
+    const it = list[idx], src = it.querySelector('img');
+    img.src = src.src; img.alt = src.alt;
+    cap.innerHTML = '';
+    const t = document.createElement('strong'); t.textContent = it.querySelector('figcaption strong').textContent;
+    const d = document.createElement('span'); d.textContent = it.querySelector('figcaption span').textContent;
+    cap.append(t, d);
+  }
+  items.forEach(it => it.querySelector('.work-btn').addEventListener('click', () => {
+    list = items.filter(x => !x.hidden);
+    show(list.indexOf(it));
+    lb.showModal();
+  }));
+  lb.querySelector('.lb-close').addEventListener('click', () => lb.close());
+  lb.querySelector('.lb-prev').addEventListener('click', () => show(idx - 1));
+  lb.querySelector('.lb-next').addEventListener('click', () => show(idx + 1));
+  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+  lb.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') show(idx - 1); if (e.key === 'ArrowRight') show(idx + 1); });
+  // swipe on phones
+  let x0 = null;
+  lb.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1)); x0 = null; });
+})();

@@ -13,6 +13,14 @@
       a: `Hello! 👋 I can answer questions about our pools, services, chemicals and how to get a quote. What would you like to know?`,
       chips: ['Types of pools', 'Cost of a pool', 'Maintenance / AMC', 'Contact details'] },
 
+    { id: 'olympic', keys: ['olympic', 'mini olympic', 'olympic size', 'competition', 'competition pool', '50m', '50 m', '25m', '25 m', 'lanes', 'lane', 'swimming training', 'training pool', 'sports complex', 'sports', 'college pool', 'school pool', 'institution', 'institutional', 'club pool'],
+      a: `Olympic-size and mini-Olympic pools are our speciality. We design and build them end to end — structure, filtration plants sized for heavy daily use, lane-marked tiling and lighting — for colleges, sports bodies, clubs and gated communities.<br><br><b>Completed:</b> NIT Surathkal (Olympic-size), Virupakshipuram, Tamil Nadu (mini-Olympic).<br><b>Now building:</b> Karnataka Police Association (Olympic-size), Devanahalli (mini-Olympic).`,
+      chips: ['Discuss a competition pool on WhatsApp', 'Ongoing projects', 'Book a site visit'] },
+
+    { id: 'ongoing', keys: ['ongoing', 'current projects', 'currently', 'working on', 'now building', 'present projects', 'latest projects', 'recent projects', 'new projects', 'under construction'],
+      a: `Projects we're building right now:<ul><li>Karnataka Police Association — Olympic-size pool</li><li>Devanahalli — mini-Olympic pool</li><li>Malpe — private lap pool</li><li>Hyderabad — private lap pool</li></ul>`,
+      chips: ['Olympic pools', 'Our projects', 'Get a quote on WhatsApp'] },
+
     { id: 'types', keys: ['types', 'type', 'kinds', 'kind', 'what pools', 'which pools', 'infinity', 'lap pool', 'lap', 'indoor', 'olympic', 'recreational', 'above ground', 'residential pool', 'commercial pool', 'villa pool', 'home pool', 'water park', 'build pool', 'new pool', 'construct', 'construction'],
       a: `We design and build all kinds of swimming pools for homes and businesses:<ul><li>Infinity (zero-edge) pools</li><li>Lap pools for fitness</li><li>Terrace &amp; rooftop pools</li><li>Indoor pools</li><li>Recreational / free-form pools</li><li>Olympic &amp; mini-Olympic pools</li><li>Spas &amp; jacuzzis</li><li>Above-ground pools and water parks</li></ul>We've completed 500+ projects since 1994.`,
       chips: ['Cost of a pool', 'Terrace pools', 'Book a site visit'] },
@@ -95,7 +103,7 @@
     'Types of pools': 'types', 'Cost of a pool': 'cost', 'How long does it take?': 'time',
     'Maintenance / AMC': 'maint', 'Repairs & renovation': 'repair', 'Pool chemicals': 'chem',
     'Terrace pools': 'terrace', 'Contact details': 'contact', 'Shop address': 'address',
-    'Book a site visit': 'visit', 'Our projects': '#projects',
+    'Book a site visit': 'visit', 'Our projects': '#projects', 'Olympic pools': 'olympic', 'Ongoing projects': 'ongoing',
   };
   const WA_CHIPS = {
     'Get a quote on WhatsApp': "Hello Rays Pools & Chemicals, I'd like a quote for a swimming pool.\nLocation:\nApprox size:\nType of pool:",
@@ -104,6 +112,7 @@
     'Order chemicals on WhatsApp': "Hello, I'd like to order pool chemicals:\n",
     'Ask about equipment on WhatsApp': "Hello, I have a question about pool equipment:\n",
     'Talk to our team on WhatsApp': "Hello Rays Pools & Chemicals, I'm an architect/builder and would like to discuss a project.",
+    'Discuss a competition pool on WhatsApp': "Hello Rays Pools & Chemicals, I'd like to discuss an Olympic / mini-Olympic pool.\nOrganisation:\nLocation:",
     'Book on WhatsApp': "Hello, I'd like to book a site visit.\nName:\nLocation:\nWhat I'm planning:",
   };
 
@@ -198,7 +207,7 @@
     if (!started) {
       started = true;
       add(`Hi! 👋 I'm the Rays Pools assistant. Ask me about pool types, costs, maintenance, chemicals or how to reach us.`, 'bot',
-        ['Types of pools', 'Cost of a pool', 'Maintenance / AMC', 'Repairs & renovation', 'Pool chemicals', 'Contact details']);
+        ['Types of pools', 'Olympic pools', 'Cost of a pool', 'Maintenance / AMC', 'Ongoing projects', 'Contact details']);
     }
     setTimeout(() => input.focus(), 50);
   }
