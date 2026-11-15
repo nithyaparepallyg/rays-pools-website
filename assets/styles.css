@@ -192,7 +192,6 @@ p{margin:0 0 1em}
 .footer-brand span{font-size:.85rem}
 .site-footer p{margin:0;font-size:.85rem}
 
-.wa-float{position:fixed;right:20px;bottom:92px;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.4);z-index:60}
 
 /* chat assistant */
 .chat-launch{position:fixed;right:20px;bottom:20px;z-index:61;height:56px;min-width:56px;padding:0 18px 0 15px;border:0;border-radius:999px;background:var(--aqua);color:#06263a;display:flex;align-items:center;gap:8px;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
@@ -281,8 +280,7 @@ body.intro-on{overflow:hidden}
 }
 @media (max-width:620px){
   .chat{right:0;left:0;bottom:0;width:100%;height:88vh;height:88dvh;border-radius:18px 18px 0 0}
-  body.chat-open .chat-launch,body.chat-open .wa-float{display:none}
-  .chat-launch-label{display:none}
+  body.chat-open .chat-launch,body.chat-open   .chat-launch-label{display:none}
   .chat-launch{padding:0;justify-content:center;width:56px}
   .pool-grid,.steps,.service-list{grid-template-columns:1fr}
   .service-list li:nth-child(n){padding:18px 0;border-left:0}
