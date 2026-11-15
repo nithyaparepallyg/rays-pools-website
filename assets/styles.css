@@ -354,6 +354,8 @@ body.intro-on{overflow:hidden}
   .nav a.btn{margin-top:14px;width:auto;padding:.7em 1.4em}
 }
 @media (max-width:620px){
+  .hero-visual,.stats,.serve{display:none}
+  .hero{padding-bottom:56px}
   .work-grid{grid-template-columns:1fr 1fr;gap:10px}
   .work figcaption{padding:10px}
   .work figcaption strong{font-size:.85rem}
