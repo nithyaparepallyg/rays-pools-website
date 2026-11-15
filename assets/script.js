@@ -1,13 +1,11 @@
 // ---------- Intro splash ----------
-// Plays once per visit. Tap/click/Enter = water sound + enter; otherwise it opens by itself.
+// Plays on every page load. Tap/click/Enter = water sound + enter; otherwise it opens by itself.
 // (Browsers don't allow sound before the visitor interacts, so the sound plays on tap.)
 (function () {
   const intro = document.getElementById('intro');
   if (!intro) return;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let seen = false;
-  try { seen = sessionStorage.getItem('rpc-intro') === '1'; } catch (e) {}
-  if (reduce || seen) { intro.remove(); return; }
+  if (reduce) { intro.remove(); return; }
 
   const AUTO_MS = 5000;
   intro.style.setProperty('--intro-ms', AUTO_MS + 'ms');
@@ -17,7 +15,6 @@
 
   function close(delay) {
     if (done) return; done = true;
-    try { sessionStorage.setItem('rpc-intro', '1'); } catch (e) {}
     setTimeout(() => {
       intro.classList.add('out');
       document.body.classList.remove('intro-on');
