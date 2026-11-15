@@ -73,8 +73,8 @@
       a: `Happy to visit your site. Send us your name, location and what you're planning, and our team will call you to fix a time.`,
       chips: ['Book on WhatsApp', 'Contact details'] },
 
-    { id: 'contact', keys: ['contact', 'phone', 'call', 'number', 'mobile', 'whatsapp', 'email', 'mail', 'talk', 'speak', 'reach'],
-      a: `You can reach us on:<ul><li>📞 <a href="tel:+919844066321">${PHONE1}</a> / <a href="tel:+919980555122">${PHONE2}</a></li><li>💬 <a href="${wa('Hello Rays Pools & Chemicals')}" target="_blank" rel="noopener">WhatsApp us</a></li><li>✉️ <a href="mailto:rayspools999@gmail.com">rayspools999@gmail.com</a></li><li>✉️ <a href="mailto:rayspoolschemicals@gmail.com">rayspoolschemicals@gmail.com</a></li></ul>`,
+    { id: 'contact', keys: ['contact', 'phone', 'call', 'number', 'mobile', 'whatsapp', 'email', 'mail', 'talk', 'speak', 'reach', 'instagram', 'facebook', 'insta', 'fb', 'social media', 'social'],
+      a: `You can reach us on:<ul><li>📞 <a href="tel:+919844066321">${PHONE1}</a> / <a href="tel:+919980555122">${PHONE2}</a></li><li>💬 <a href="${wa('Hello Rays Pools & Chemicals')}" target="_blank" rel="noopener">WhatsApp us</a></li><li>✉️ <a href="mailto:rayspools999@gmail.com">rayspools999@gmail.com</a></li><li>✉️ <a href="mailto:rayspoolschemicals@gmail.com">rayspoolschemicals@gmail.com</a></li><li>📷 <a href="https://www.instagram.com/rayspoolschemicals/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/rayspoolschemicals/" target="_blank" rel="noopener">Facebook</a></li></ul>`,
       chips: ['Shop address', 'Book a site visit'] },
 
     { id: 'address', keys: ['address', 'office', 'shop', 'store', 'located', 'location', 'map', 'maps', 'directions', 'koramangala', 'national games village', 'come to', 'where are you', 'where is your', 'your office', 'where is the shop'],

@@ -193,6 +193,13 @@ p{margin:0 0 1em}
 .site-footer p{margin:0;font-size:.85rem}
 
 
+/* social */
+.social{display:flex;flex-wrap:wrap;gap:10px 20px}
+.social a{display:inline-flex;align-items:center;gap:8px;font-weight:600}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;border:1px solid rgba(255,255,255,.3);transition:background .15s,border-color .15s}
+.footer-social a:hover{background:rgba(255,255,255,.12);border-color:#9be3f2;color:#9be3f2}
+
 /* chat assistant */
 .chat-launch{position:fixed;right:20px;bottom:20px;z-index:61;height:56px;min-width:56px;padding:0 18px 0 15px;border:0;border-radius:999px;background:var(--aqua);color:#06263a;display:flex;align-items:center;gap:8px;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
 .chat-launch:hover{background:#5cc6df}
@@ -279,6 +286,7 @@ body.intro-on{overflow:hidden}
   .nav a.btn{margin-top:14px;width:auto;padding:.7em 1.4em}
 }
 @media (max-width:620px){
+  .site-footer{padding-bottom:96px}
   .chat{right:0;left:0;bottom:0;width:100%;height:88vh;height:88dvh;border-radius:18px 18px 0 0}
   body.chat-open .chat-launch{display:none}
   .chat-launch-label{display:none}
