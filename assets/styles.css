@@ -150,16 +150,6 @@ p{margin:0 0 1em}
 .proj-grid ul{list-style:none;padding:0;margin:0}
 .proj-grid li{padding:9px 0;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:1.2rem;color:var(--navy-deep)}
 
-/* service areas */
-.areas{background:var(--navy-deep);color:#fff}
-.areas h2{color:#fff}
-.areas-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}
-.areas-grid>div p:last-child{color:#c3d9e7}
-.area-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
-.area-list li{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column}
-.area-list strong{font-family:var(--serif);font-size:1.35rem;font-weight:600}
-.area-list span{color:#9bbdd3;font-size:.88rem}
-
 /* faq */
 .faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
 .faq-grid>*{min-width:0}
@@ -345,8 +335,8 @@ body.intro-on{overflow:hidden}
 @media (max-width:980px){
   .olympic-grid{grid-template-columns:1fr;gap:36px}
   .work-grid{grid-template-columns:repeat(3,1fr)}
-  .hero-grid,.about-grid,.services-grid,.contact-grid,.chem,.areas-grid,.faq-grid{grid-template-columns:1fr}
-  .areas-grid,.faq-grid{gap:24px}
+  .hero-grid,.about-grid,.services-grid,.contact-grid,.chem,.faq-grid{grid-template-columns:1fr}
+  .faq-grid{gap:24px}
   .hero-visual{grid-template-rows:repeat(6,44px)}
   .pool-grid,.steps{grid-template-columns:1fr 1fr}
   .eq-grid{grid-template-columns:repeat(2,1fr)}
@@ -383,7 +373,6 @@ body.intro-on{overflow:hidden}
   .chat-launch svg{width:28px;height:28px}
   .pool-grid,.steps,.service-list{grid-template-columns:1fr}
   .service-list li:nth-child(n){padding:18px 0;border-left:0}
-  .area-list{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr 1fr}
   .stats div:nth-child(3){padding-left:0;border-left:0}
   .stats div:nth-child(n+3){border-top:1px solid rgba(255,255,255,.18)}
