@@ -1,6 +1,8 @@
 // ---------- Intro splash ----------
-// Plays on every page load. Tap/click/Enter = water sound + enter; otherwise it opens by itself.
-// (Browsers don't allow sound before the visitor interacts, so the sound plays on tap.)
+// Plays on every page load and opens the site by itself after a few seconds.
+// A short, soft chime plays with it. Browsers only allow sound once the visitor has
+// interacted with the page, so we try to play straight away and, if the browser
+// blocks it, play it the moment the visitor taps.
 (function () {
   const intro = document.getElementById('intro');
   if (!intro) return;
@@ -11,7 +13,7 @@
   intro.style.setProperty('--intro-ms', AUTO_MS + 'ms');
   document.body.classList.add('intro-on');
   intro.focus({ preventScroll: true });
-  let done = false;
+  let done = false, played = false, ctx = null;
 
   function close(delay) {
     if (done) return; done = true;
@@ -22,39 +24,62 @@
     }, delay || 0);
   }
 
-  function splashSound() {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    const ctx = new AC();
-    const now = ctx.currentTime;
-    // Splash: a burst of filtered noise that sweeps down
-    const len = ctx.sampleRate * 1.4;
-    const buf = ctx.createBuffer(1, len, ctx.sampleRate);
-    const d = buf.getChannelData(0);
-    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.2);
-    const noise = ctx.createBufferSource(); noise.buffer = buf;
-    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass';
-    lp.frequency.setValueAtTime(3200, now); lp.frequency.exponentialRampToValueAtTime(300, now + 1.2);
-    const ng = ctx.createGain(); ng.gain.setValueAtTime(0.0001, now);
-    ng.gain.exponentialRampToValueAtTime(0.5, now + 0.03); ng.gain.exponentialRampToValueAtTime(0.0001, now + 1.3);
-    noise.connect(lp).connect(ng).connect(ctx.destination); noise.start(now);
-    // Bubbles: short rising sine "bloops"
-    for (let k = 0; k < 9; k++) {
-      const t = now + 0.15 + Math.random() * 0.9;
-      const o = ctx.createOscillator(); o.type = 'sine';
-      const f = 350 + Math.random() * 650;
-      o.frequency.setValueAtTime(f, t); o.frequency.exponentialRampToValueAtTime(f * 2.2, t + 0.07);
-      const g = ctx.createGain(); g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(0.12, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.09);
-      o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + 0.1);
-    }
-    setTimeout(() => ctx.close(), 2000);
+  // Soft "water chime": a gentle rising arpeggio with an echo, about 4 seconds, low volume.
+  function chime() {
+    if (played || !ctx || ctx.state !== 'running') return;
+    played = true;
+    const now = ctx.currentTime + 0.05;
+    const master = ctx.createGain(); master.gain.value = 0.07;           // overall volume (0–1)
+    const echo = ctx.createDelay(); echo.delayTime.value = 0.28;
+    const fb = ctx.createGain(); fb.gain.value = 0.35;
+    const wet = ctx.createGain(); wet.gain.value = 0.5;
+    const tone = ctx.createBiquadFilter(); tone.type = 'lowpass'; tone.frequency.value = 3800;
+    master.connect(tone).connect(ctx.destination);
+    master.connect(echo); echo.connect(fb).connect(echo); echo.connect(wet).connect(tone);
+
+    // D major pentatonic, rising then settling
+    const notes = [587.33, 739.99, 880.0, 987.77, 1174.66, 987.77, 880.0];
+    notes.forEach((f, i) => {
+      const t = now + i * 0.22;
+      [['sine', 1], ['triangle', 0.25]].forEach(([type, lvl]) => {
+        const o = ctx.createOscillator(); o.type = type; o.frequency.value = type === 'sine' ? f : f * 2;
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(lvl, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 1.6);
+        o.connect(g).connect(master); o.start(t); o.stop(t + 1.7);
+      });
+    });
+    // Warm pad underneath
+    [293.66, 440.0].forEach(f => {
+      const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = f;
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.exponentialRampToValueAtTime(0.35, now + 0.8);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 3.8);
+      o.connect(g).connect(master); o.start(now); o.stop(now + 4);
+    });
+    setTimeout(() => { try { ctx.close(); } catch (e) {} }, 6000);
   }
+
+  // Try to start sound immediately (works where the browser allows it, e.g. returning visitors)
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (AC) {
+      ctx = new AC();
+      if (ctx.state === 'running') chime();
+      else ctx.resume().then(chime).catch(() => {});
+    }
+  } catch (e) {}
 
   function enter() {
     if (done) return;
-    try { splashSound(); } catch (e) {}
-    close(650);
+    if (!played && ctx) {
+      ctx.resume().then(chime).catch(() => {});
+      close(900);              // let the chime start before the site opens
+    } else {
+      close(0);
+    }
   }
   intro.addEventListener('click', enter);
   intro.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') { e.preventDefault(); enter(); } });
