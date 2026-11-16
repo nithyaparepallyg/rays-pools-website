@@ -312,7 +312,8 @@ body.intro-on{overflow:hidden}
 .intro-center{position:relative;z-index:2;text-align:center;padding:0 24px;margin-top:-8vh}
 .intro-logo{width:min(180px,42vw);height:auto;margin:0 auto 18px;opacity:0;transform:translateY(14px) scale(.92);animation:logoIn 1.4s .2s cubic-bezier(.2,.7,.2,1) forwards,bob 4s 1.6s ease-in-out infinite}
 .intro-name{font-family:var(--serif);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:600;margin:0;opacity:0;animation:fadeUp 1s .9s forwards}
-.intro-tag{margin:.4em 0 0;font-size:clamp(.7rem,2.2vw,.85rem);letter-spacing:.24em;text-transform:uppercase;color:#9be3f2;opacity:0;animation:fadeUp 1s 1.2s forwards}
+.intro-line{margin:.25em 0 0;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.25rem,3.6vw,1.8rem);color:#9be3f2;opacity:0;animation:fadeUp 1s 1.2s forwards}
+.intro-tag{margin:.9em 0 0;font-size:clamp(.72rem,2.2vw,.85rem);font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#d5e6f1;opacity:0;animation:fadeUp 1s 1.5s forwards}
 .intro-ripples{position:absolute;left:50%;top:42%;width:0;height:0}
 .intro-ripples span{position:absolute;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border:1.5px solid rgba(155,227,242,.5);border-radius:50%;transform:scale(.1);opacity:0;animation:ripple 3.6s 1s ease-out infinite}
 .intro-ripples span:nth-child(2){animation-delay:2.2s}
